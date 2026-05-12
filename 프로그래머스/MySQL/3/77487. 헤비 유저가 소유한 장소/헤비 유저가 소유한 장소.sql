@@ -1,0 +1,9 @@
+SELECT pl.ID, pl.NAME, pl.HOST_ID 
+FROM PLACES pl, (
+    SELECT p.HOST_ID, count(p.ID) as CNT
+    FROM PLACES p
+    GROUP BY p.HOST_ID
+) p
+WHERE p.CNT>1
+AND pl.HOST_ID in (p.HOST_ID)
+ORDER BY pl.ID
